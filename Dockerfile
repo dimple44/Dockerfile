@@ -1,5 +1,15 @@
 FROM ubuntu
 
-RUN apt-get update -y && apt-get install tzdata -y && apt-get install apache2 -y
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -y
+
+RUN apt-get install apache2 -y
+
+RUN apt-get install apache2-utils -y
+
+RUN apt-get clean
 
 EXPOSE 80
+
+CMD ["apache2ctl","-D","FOREGROUND"]
